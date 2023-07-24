@@ -1,0 +1,2 @@
+*.sh	eol=lf
+*.env	eol=lf
