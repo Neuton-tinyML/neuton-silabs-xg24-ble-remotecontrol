@@ -111,9 +111,6 @@ if (p_input)
     }
 }
 ```
-### Map predicted results on the required values (for Classification task type)
-
-Inference results are encoded (0…n). For mapping on your classes, use dictionaries `binary_target_dict_csv.csv / multi_target_dict_csv.csv`.
 
 ### Additional solution information API
 
@@ -128,57 +125,3 @@ You can use the following API to get solution information:
 * `neuton_nn_model_size` - Get model size in bytes (flash usage)
 * `neuton_nn_model_bitdepth` - Get model bit depth (8/16/32 bit)
 * `neuton_nn_input_scaling` - Get solution input scaling type: NEUTON_NN_INPUT_SCALING_UNIFIED, NEUTON_NN_INPUT_SCALING_UNIQUE
-
-# Audio preprocessing and prediction
-
-Audio preprocessing is not integrated into the common Neuton pipeline, but we provide a set of algorithms and an external audio frontend for possible integration.
-You can find audio Keyword Spotting frontend in the `pipeline/kws/neuton_kws_frontend.h`
-Here is a code example of audio preprocessing with Neuton:
-``` C
-
-#include <neuton/neuton.h>
-#include <neuton_generated/neuton_user_data_prep_config.h>
-#include <pipeline/kws/neuton_kws_frontend.h>
-#include <string.h>
-
-static neuton_kws_frontend_ctx_t* kws_frontend = NULL;
-
-static void on_spectrum_ready(void* p_ctx, neuton_f32_t* p_spectrum)
-{
-	neuton_kws_frontend_ctx_t* p_kws = (neuton_kws_frontend_ctx_t*)p_ctx;
-    neuton_inference_input_t* p_input;
-
-    p_input = neuton_nn_feed_inputs(p_spectrum, p_kws->melspectr.freq_bands * p_kws->melspectr.time_bands);
-
-    if (p_input != NULL)
-    {
-        neuton_u16_t predicted_target;
-        neuton_output_t* probabilities;
-        neuton_i16_t outputs_num = neuton_nn_run_inference(p_input, &predicted_target, &probabilities);
-
-        if (outputs_num > 0)
-        {
-            printf("Predicted class %d with probability %f\r\n", predicted_target, probabilities[predicted_target]);
-        }
-    }
-}
-
-bool init_audio_frontend(void)
-{
-	kws_frontend = malloc(sizeof(neuton_kws_frontend_ctx_t));
-
-    neuton_status_t res = neuton_kws_frontend_init(kws_frontend, NEUTON_DSP_AUDIO_WINDOW_LENGTH,
-                                                NEUTON_DSP_AUDIO_WINDOW_HOP,
-                                                NEUTON_DSP_AUDIO_SAMPLING_RATE_HZ,
-                                                NEUTON_DSP_MELSPECTROGRAM_TIME_BANDS,
-                                                NEUTON_DSP_MELSPECTROGRAM_FREQ_BANDS,
-                                                0, NULL, on_spectrum_ready, kws_frontend);
-    return (res == NEUTON_STATUS_SUCCESS);
-}
-
-void feed_audio_samples(const float* p_audio_samples, size_t samples_num)
-{
-    neuton_kws_frontend_process(kws_frontend, p_audio_samples, samples_num);
-}
-
-```
