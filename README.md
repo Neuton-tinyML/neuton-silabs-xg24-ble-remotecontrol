@@ -28,6 +28,7 @@ To learn more about gestures and how to reproduce them, check out our demo video
 
 The Neuton.AI Gesture Recognition solution memory footprint:
 
+__Version 1.1.2__
 |                       |    FLASH       |   SRAM      |
 | --------------------- | -------------- | ----------- |
 | __Total Footprint__   | __4.2 kB__     | __1.4 kB__  |
