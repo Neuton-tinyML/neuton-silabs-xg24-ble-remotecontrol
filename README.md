@@ -22,7 +22,7 @@ This project demonstrates a gesture based remote control device using __Silabs x
 
 To learn more about gestures and how to reproduce them, check out our demo video!
 
-[![demo video youtube](https://img.youtube.com/vi/8fx7K4ZHqIU/0.jpg)](https://www.youtube.com/watch?v=8fx7K4ZHqIU)
+[![demo video youtube](https://img.youtube.com/vi/8fx7K4ZHqIU/0.jpg)](https://youtu.be/l1DmYCVpGHk)
 
 ## Model specifications <div id='model-spec'/>
 
