@@ -1,6 +1,7 @@
 # Neuton.AI xG24 Gesture Based BLE Remote Control Device
 
 - [Overview](#overview)
+- [Demo video](#demo-video)
 - [Model specifications](#model-spec)
 - [Hardware overview](#hw-overview)
 - [Setup software environment](#setup-sw-env)
@@ -10,7 +11,7 @@
 
 ## Overview <div id='overview'/>
 
-This project demonstrates a gesture based remote control device using __Silabs xG24 Dev Kit__. The xG24 development kit could be connected to the PC via Bluetooth as a HID device and using gestures the user can control media stream or slides of the presentation. Based on accelerometer and gyroscope data the Neuton.AI model could recognize __8 classes__ of gestures: Swipe Right, Swipe Left, Double Tap, Double Thumb, Rotation Clockwise and Counter clockwise, No Gestures(IDLE) and Unknown Gesture.
+This project demonstrates a gesture based remote control device using [__Silabs xG24 Dev Kit__](https://www.silabs.com/development-tools/wireless/efr32xg24-dev-kit?tab=overview). The xG24 development kit could be connected to the PC via Bluetooth as a HID device and using gestures the user can control media stream or slides of the presentation. Based on accelerometer and gyroscope data the Neuton.AI model could recognize __8 classes__ of gestures: Swipe Right, Swipe Left, Double Tap, Double Thumb, Rotation Clockwise and Counter clockwise, No Gestures(IDLE) and Unknown Gesture.
 
 
 |                                       |                                        |                                               |
@@ -21,6 +22,8 @@ This project demonstrates a gesture based remote control device using __Silabs x
 | Double Thumb                          | Swipe Left                             |      Rotation Counter-clockwise               |
 
 To learn more about gestures and how to reproduce them, check out our demo video!
+
+## Demo video <div id='demo-video'/>
 
 [![demo video youtube](https://img.youtube.com/vi/8fx7K4ZHqIU/0.jpg)](https://youtu.be/l1DmYCVpGHk)
 
